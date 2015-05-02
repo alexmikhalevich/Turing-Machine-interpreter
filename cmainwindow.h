@@ -12,11 +12,11 @@ class CMainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit CMainWindow(QWidget *parent = 0);
+    explicit CMainWindow(QWidget* parent = 0);
     ~CMainWindow();
 
 private:
-    Ui::CMainWindow *ui;
+    Ui::CMainWindow* ui;
 };
 
 #endif // CMAINWINDOW_H
