@@ -4,7 +4,7 @@
 #include <QMainWindow>
 
 namespace Ui {
-class CMainWindow;
+    class CMainWindow;
 }
 
 class CMainWindow : public QMainWindow
@@ -14,9 +14,16 @@ class CMainWindow : public QMainWindow
 public:
     explicit CMainWindow(QWidget* parent = 0);
     ~CMainWindow();
-
 private:
     Ui::CMainWindow* ui;
+    bool isModified;
+private slots:
+    void createFile();
+    void openFile();
+    void saveFile();
+    void runProgram();
+    void exitProgram();
+    void textModified();
 };
 
 #endif // CMAINWINDOW_H
