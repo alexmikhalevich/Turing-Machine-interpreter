@@ -8,7 +8,7 @@ class CSyntaxHighlighter : public QSyntaxHighlighter
 public:
     CSyntaxHighlighter(QTextDocument* parent = 0);
 protected:
-    void highlightBlock(const QString &text);
+    void highlightBlock(const QString& text);
 private:
     struct HighlightningRule
     {
@@ -16,6 +16,7 @@ private:
         QTextCharFormat format;
     };
     QVector<HighlightningRule> sh_highlightningRules;
+    QTextCharFormat sh_emptyCellFormat;
     QTextCharFormat sh_stateFormat;
     QTextCharFormat sh_directionFormat;
     QTextCharFormat sh_singleLineCommentFormat;

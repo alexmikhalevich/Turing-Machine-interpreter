@@ -4,14 +4,20 @@ CSyntaxHighlighter::CSyntaxHighlighter(QTextDocument* parent) : QSyntaxHighlight
 {
     HighlightningRule rule;
 
+    sh_emptyCellFormat.setForeground(Qt::darkMagenta);
+    rule.pattern = QRegExp("\\#");
+    rule.format = sh_emptyCellFormat;
+    sh_highlightningRules.append(rule);
+
     sh_directionFormat.setFontWeight(QFont::Bold);
     sh_directionFormat.setForeground(Qt::darkGray);
-    rule.pattern = QRegExp("[RLN]{1,10}");
+    rule.pattern = QRegExp("[RLN]");
     rule.format = sh_directionFormat;
     sh_highlightningRules.append(rule);
 
-    sh_stateFormat.setForeground(Qt::cyan);
-    rule.pattern = QRegExp("q*{1,5}");
+    sh_stateFormat.setFontWeight(QFont::Bold);
+    sh_stateFormat.setForeground(Qt::darkCyan);
+    rule.pattern = QRegExp("q[0-9]{1,}");
     rule.format = sh_stateFormat;
     sh_highlightningRules.append(rule);
 
@@ -27,7 +33,7 @@ CSyntaxHighlighter::CSyntaxHighlighter(QTextDocument* parent) : QSyntaxHighlight
 
 void CSyntaxHighlighter::highlightBlock(const QString& text)
 {
-    foreach (HighlightningRule& rule, sh_highlightningRules)
+    foreach (const HighlightningRule& rule, sh_highlightningRules)
     {
         QRegExp expression(rule.pattern);
         int index = expression.indexIn(text);
@@ -59,7 +65,7 @@ void CSyntaxHighlighter::highlightBlock(const QString& text)
             commentLength = text.length() - startIndex;
         }
         else
-            commentLength = endIndex - startIndex;      //NOTE: + commentEndExpression.matchedLength() ???
+            commentLength = endIndex - startIndex + sh_commentEndExpr.matchedLength();
         setFormat(startIndex, commentLength, sh_multilineCommentFormat);
         startIndex = sh_commentEndExpr.indexIn(text, startIndex + commentLength);
     }
