@@ -18,10 +18,12 @@ CMainWindow::CMainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::CMai
     connect(ui->action_Run, SIGNAL(triggered()), this, SLOT(runProgram()));
 
     isModified = false;
+    mw_syntaxHighlighter = new CSyntaxHighlighter(ui->codeEdit->document());
 }
 
 CMainWindow::~CMainWindow()
 {
+    delete mw_syntaxHighlighter;
     delete ui;
 }
 

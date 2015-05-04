@@ -2,6 +2,7 @@
 #define CMAINWINDOW_H
 
 #include <QMainWindow>
+#include "csyntaxhighlighter.h"
 
 namespace Ui {
     class CMainWindow;
@@ -17,6 +18,7 @@ public:
 private:
     Ui::CMainWindow* ui;
     bool isModified;
+    CSyntaxHighlighter* mw_syntaxHighlighter;
 private slots:
     void createFile();
     void openFile();
